@@ -12,9 +12,12 @@ app.post("/upload", function (req, res) {
     doWhatever: () => console.log("worked"),
     req: req,
     res: res,
+    deleteExcel: true,
   });
 
   console.log(result);
+
+  res.sendFile(__dirname + "/haha.html");
 });
 
 app.listen("3000", function () {

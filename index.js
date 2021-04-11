@@ -17,9 +17,9 @@ app.use(bodyParser.json());
 //   doWhatever: () => console.log("worked"),
 // };
 
-var resultToReturn;
+const parsexcel = ({ path, doWhatever, req, res, deleteExcel = false }) => {
+  var resultToReturn;
 
-const parsexcel = ({ path, doWhatever, req, res }) => {
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path); // path input from user
@@ -82,20 +82,28 @@ const parsexcel = ({ path, doWhatever, req, res }) => {
           output: null, // we don't require output.json, add sheet name functionality as well
           lowerCaseHeaders: true,
         },
-        function (err, result) {
+        async (err, result) => {
           if (err) {
             return res.json({ error_code: 1, err_desc: err, data: null });
           }
+
+          if (deleteExcel) {
+            var fs = require("fs");
+            try {
+              fs.unlinkSync(req.file.path);
+            } catch (e) {
+              //error deleting the file
+            }
+          }
+
           resultToReturn = result;
           //   console.log(resultToReturn);
           doWhatever(); // function
           // console.log(result);
-          //   const resulttwo = result;
-          return result;
         }
       );
     } catch (e) {
-      res.json({ error_code: 1, err_desc: "Corupted excel file" });
+      res.json({ error_code: 1, err_desc: "corrupted excel file" });
     }
   });
   console.log(resultToReturn);
