@@ -4,6 +4,7 @@
   "description": "parse excel and do whatever you want",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,5 +19,8 @@
     "multer": "^1.4.2",
     "xls-to-json-lc": "^0.3.4",
     "xlsx-to-json-lc": "^0.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

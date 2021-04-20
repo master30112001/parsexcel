@@ -97,9 +97,9 @@ const parsexcel = ({ path, doWhatever, req, res, deleteExcel = false }) => {
           }
 
           resultToReturn = result;
-          //   console.log(resultToReturn);
+          console.log(result);
+
           doWhatever(); // function
-          // console.log(result);
         }
       );
     } catch (e) {
